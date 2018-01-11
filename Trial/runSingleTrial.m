@@ -105,6 +105,7 @@ const.trialsdone=trial.trialnum;
         eye.eyetracker.stop_gaze_data();
         log_txt=sprintf(text.gazestop,num2str(clock));
         fprintf(const.log_text_fid,'%s\n',log_txt);
+        plottrial(const,scr,collected_gaze_data)
     else
         collected_gaze_data=i;
     end
@@ -157,6 +158,7 @@ const.trialsdone=trial.trialnum;
     end
     
     if keyCode(my_key.space)==1;
+    close
     const.trialsdone=trial.trialnum;
     config.scr = scr; config.const = rmfield(const,'tex'); config.Trialevents = Trialevents; config.my_key = my_key;config.text = text;config.sounds = sounds;config.eye = eye;
     log_txt=sprintf(text.save,num2str(clock));
