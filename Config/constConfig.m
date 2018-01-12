@@ -73,4 +73,13 @@ const.dotSizePix = 5;
 const.fixdur=0.5;
 const.ITI=2; % Inter-trial interval.
 
+%Slidebar attributes.
+const.tick = [0 0 4 10];
+const.rectColor=[200 200 200];
+const.selectRect = [0 0 10 40];
+const.blue=[0 0 200];
+const.slidebar_xsize=const.stimright/2;
+const.slidebar_ysize=10;
+const.baseBar =[0 0  const.slidebar_xsize  const.slidebar_ysize];
+
 end

@@ -32,7 +32,7 @@ text.formatSpecTrial=('Trial %s Stimtype: %s Scram type: %s Duration: %s Pair: %
 text.gazestart=('Gaze started to record at: %s');
 text.gazestop=('Gaze stopped recording at: %s');
 text.save=('Data saved at: %s');
-text.choice=('Click a point on the slider to indicate \n how strong your preference was');
+text.choice=('Click a point on the slider to indicate how strong your preference was');
 text.choice_desc={'Barely preferred','Slightly preferred','Moderately preferred','Very much preferred'};
 
 end

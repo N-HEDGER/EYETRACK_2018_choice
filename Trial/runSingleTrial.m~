@@ -154,11 +154,10 @@ const.trialsdone=trial.trialnum;
         end
         
         %     Draw PAS labels and numbers.
-        Screen('TextSize', scr.main, [40]);
-        DrawFormattedText(scr.main, text.choice,vect(1)+((vect(2)-vect(1))/2), const.awrect(2)-400, WhiteIndex(scr.main),[],[]);
+        Screen('TextSize', windowPtr, [40]);
+        DrawFormattedText(scr.main, text.choice,vect(2)-(0.2*(vect(2)-vect(1))), const.awrect(2)-100, WhiteIndex(scr.main),[],[]);
         
         for txt=1:4
-        Screen('TextSize', scr.main, [20]);
         DrawFormattedText(scr.main, text.choice_desc{txt},vect(txt)-(0.2*(vect(2)-vect(1))), const.awrect(2)-100, WhiteIndex(scr.main),[],[]);
         %DrawFormattedText(scr.main, num2str(txt),vect(txt), const.awrect(2)+40, WhiteIndex(scr.main),[],[]);
         end

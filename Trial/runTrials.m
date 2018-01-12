@@ -62,6 +62,7 @@ addpath(genpath('/Users/nickhedger/Documents/Temp/Eyetrack_stim'))
  const.tex.Selecttex=Screen('MakeTexture', scr.main,Selecttex);
  
 % Define Rects
+const.awrect=CenterRect(const.baseBar, scr.rect);
 [const.framerectl] = CenterRect([0 0 round(const.element_size)+const.framewidth round(const.element_size*const.asp)+const.framewidth], scr.rect)-[const.sep 0 const.sep 0];
 [const.framerectr] = CenterRect([0 0 round(const.element_size)+const.framewidth round(const.element_size*const.asp)+const.framewidth], scr.rect)+[const.sep 0 const.sep 0];
 [const.stimrectl] = CenterRect([0 0 round(const.element_size) round(const.element_size*const.asp)], scr.rect)-[const.sep 0 const.sep 0];
@@ -75,6 +76,7 @@ log_txt=sprintf(text.formatSpecStart,num2str(clock));
 fprintf(const.log_text_fid,'%s\n',log_txt);
 Trialevents.elapsed=cell(1,length(Trialevents.trialmat));
 Trialevents.resp=cell(1,length(Trialevents.trialmat));
+Trialevents.awResp=zeros(1,length(Trialevents.trialmat));
 
 else
     
@@ -87,7 +89,8 @@ sound(sounds.loaded,sounds.loadedf);
 
 
 Screen('DrawTexture',scr.main,const.tex.instruct,[],[0, 0,scr.scr_sizeX, scr.scr_sizeY]);
-DrawFormattedText(scr.main, text.loaded, 'justifytomax', 100, WhiteIndex(scr.main),[],[]);
+DrawFormattedText(scr.main, text.loaded, 'justifytomax', 10, WhiteIndex(scr.main),[],[]);
+Screen('TextSize', scr.main, [20]);
 Screen('Flip', scr.main);
 KbWait;
 
