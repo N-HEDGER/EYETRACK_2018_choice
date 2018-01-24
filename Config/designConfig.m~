@@ -45,11 +45,10 @@ fullvecsc=horzcat(sidevec,repmat(2,const.reps,1),repmat(const.durations(1),const
 
 fullvec=vertcat(fullvecin,fullvecsc);
      
-Trialevents.trialmat=GenerateEventTable(fullvec,const.repeats,const.isfixed);
+Trialevents.trialmat=GenerateEventTable(fullvec,const.num,const.isfixed);
 
 
-% Now ensure that the side the social stimulus is on is counterbalanced
-% (hald of the reps are left, half are right.
+% Now introduce 
 for i=1:length(Trialevents.trialmat)
     if Trialevents.trialmat(i,6)==2 || Trialevents.trialmat(i,6)==4
         Trialevents.trialmat(i,2)=3-Trialevents.trialmat(i,2);

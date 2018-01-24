@@ -85,9 +85,9 @@ const.trialsdone=trial.trialnum;
     fprintf(const.log_text_fid,'%s\n',log_txt);
     
     t1=GetSecs;
-    [KeyIsDown,secs,keyCode]=KbCheck;
+    [KeyIsDown,secs,keyCode]=KbCheck(max(GetKeyboardIndices));
     while keyCode(my_key.left)==0 && keyCode(my_key.right)==0
-        [KeyisDown,secs,keyCode]=KbCheck;
+        [KeyisDown,secs,keyCode]=KbCheck(max(GetKeyboardIndices));
     end
     
     if keyCode(my_key.left)==1;
@@ -135,62 +135,62 @@ const.trialsdone=trial.trialnum;
     Selectoffset=Screen('Flip',scr.main,[]);
     WaitSecs(0.5)
     
-    ShowCursor;
-    SetMouse(const.awrect(1), const.awrect(2), scr.main);
-    
-    %     Define response range and rescale this to the 1-4 range.
-    
-    range=const.awrect(3)-const.awrect(1);
-    rescaled=linspace(1,4,range);
-    
-    
- 
-    while 1
-        %         Draw tickmarks
-        vect=round(linspace(const.awrect(1),const.awrect(3),4));
-        for tick=vect
-            tick_offset = OffsetRect(const.tick, tick, const.awrect(2)-2);
-            Screen('FillRect', scr.main, const.rectColor, tick_offset);
-        end
-        
-        %     Draw PAS labels and numbers.
-        Screen('TextSize', scr.main, [40]);
-        DrawFormattedText(scr.main, text.choice,vect(1)+((vect(2)-vect(1))/2), const.awrect(2)-400, WhiteIndex(scr.main),[],[]);
-        
-        for txt=1:4
-        Screen('TextSize', scr.main, [20]);
-        DrawFormattedText(scr.main, text.choice_desc{txt},vect(txt)-(0.2*(vect(2)-vect(1))), const.awrect(2)-100, WhiteIndex(scr.main),[],[]);
-        %DrawFormattedText(scr.main, num2str(txt),vect(txt), const.awrect(2)+40, WhiteIndex(scr.main),[],[]);
-        end
-        
-        %    Draw the response bar
-        Screen('FillRect', scr.main, const.rectColor, const.awrect);
-        
-        %     Get mouse position and determine whether or not it is in the bar.
-        [mx, my, buttons] = GetMouse(scr.main);
-        inside_bar = IsInRect(mx, my+1, const.awrect);
-        resprect = CenterRectOnPointd(const.selectRect, mx, const.awrect(2)+1);
-        
-        %    Draw slider at new location
-        Screen('FillRect', scr.main, const.blue, resprect);
-        
-        %    Mouse must be clicked, spacebar must be pressed and slider must be
-        %    within response bar range.
-        if ismember(round(mx),const.awrect(1):const.awrect(3)) && sum(buttons) > 0
-            Trialevents.awResp(i) = rescaled(round(mx)-const.awrect(1));
-            break;
-            WaitSecs(1)
-            
-        end
-        
-        Screen('Flip', scr.main);
-        
-        if sum(buttons) <= 0
-            offsetSet = 0;
-        end
-    end
-    HideCursor;
-    
+%     ShowCursor;
+%     SetMouse(const.awrect(1), const.awrect(2), scr.main);
+%     
+%     %     Define response range and rescale this to the 1-4 range.
+%     
+%     range=const.awrect(3)-const.awrect(1);
+%     rescaled=linspace(1,4,range);
+%     
+%     
+%  
+%     while 1
+%         %         Draw tickmarks
+%         vect=round(linspace(const.awrect(1),const.awrect(3),4));
+%         for tick=vect
+%             tick_offset = OffsetRect(const.tick, tick, const.awrect(2)-2);
+%             Screen('FillRect', scr.main, const.rectColor, tick_offset);
+%         end
+%         
+%         %     Draw PAS labels and numbers.
+%         Screen('TextSize', scr.main, [40]);
+%         DrawFormattedText(scr.main, text.choice,vect(1)+((vect(2)-vect(1))/2), const.awrect(2)-400, WhiteIndex(scr.main),[],[]);
+%         
+%         for txt=1:4
+%         Screen('TextSize', scr.main, [20]);
+%         DrawFormattedText(scr.main, text.choice_desc{txt},vect(txt)-(0.2*(vect(2)-vect(1))), const.awrect(2)-100, WhiteIndex(scr.main),[],[]);
+%         %DrawFormattedText(scr.main, num2str(txt),vect(txt), const.awrect(2)+40, WhiteIndex(scr.main),[],[]);
+%         end
+%         
+%         %    Draw the response bar
+%         Screen('FillRect', scr.main, const.rectColor, const.awrect);
+%         
+%         %     Get mouse position and determine whether or not it is in the bar.
+%         [mx, my, buttons] = GetMouse(scr.main);
+%         inside_bar = IsInRect(mx, my+1, const.awrect);
+%         resprect = CenterRectOnPointd(const.selectRect, mx, const.awrect(2)+1);
+%         
+%         %    Draw slider at new location
+%         Screen('FillRect', scr.main, const.blue, resprect);
+%         
+%         %    Mouse must be clicked, spacebar must be pressed and slider must be
+%         %    within response bar range.
+%         if ismember(round(mx),const.awrect(1):const.awrect(3)) && sum(buttons) > 0
+%             Trialevents.awResp(i) = rescaled(round(mx)-const.awrect(1));
+%             break;
+%             WaitSecs(1)
+%             
+%         end
+%         
+%         Screen('Flip', scr.main);
+%         
+%         if sum(buttons) <= 0
+%             offsetSet = 0;
+%         end
+%     end
+%     HideCursor;
+%     
     
     Screen('Flip', scr.main);
     
@@ -211,9 +211,9 @@ const.trialsdone=trial.trialnum;
     Screen('FillRect', scr.main, const.blue, progbar);
     
     t1=GetSecs;
-    [KeyIsDown,secs,keyCode]=KbCheck;
+    [KeyIsDown,secs,keyCode]=KbCheck(max(GetKeyboardIndices));
     while keyCode(my_key.space)==0 && keyCode(my_key.escape)==0
-        [KeyisDown,secs,keyCode]=KbCheck;
+        [KeyisDown,secs,keyCode]=KbCheck(max(GetKeyboardIndices));
     end
     
     if keyCode(my_key.space)==1;
