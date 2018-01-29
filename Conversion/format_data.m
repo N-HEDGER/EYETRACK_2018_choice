@@ -7,6 +7,7 @@ directory = (which('rescale'));cd(directory(1:end-20));
 % Add paths
 % ---------------
 addpath('Data');
+addpath('Conversion');
 cd ('Data')
 
 % Prompt user for subject directory
@@ -32,7 +33,6 @@ trialinfo=load(strcat(const_dir,'/',filesconst{1}));
 events=trialinfo.config.Trialevents.trialmat;
 RTs=trialinfo.config.Trialevents.elapsed;
 choices=trialinfo.config.Trialevents.resp;
-
 
 
 % By default, the trials will be ordered in an odd way (my fault), so
@@ -99,3 +99,40 @@ result=horzcat(cell2mat(trialnum)',cell2mat(times)',cell2mat(leftfixX)',cell2mat
 
 % Write the text file
 dlmwrite(strcat(folder,'/',trialinfo.config.const.sbj.subname{1},'_summary.txt'),result)
+
+
+
+% Now write RT data to its own csv for the DDM modeling.
+tempsubid=repmat(0,length(trial),1);
+sideid=events(:,2);
+scid=events(:,3);
+choice=cell2mat(choices)';
+
+resp2=repmat(0,length(trial),1);
+for i=1:length(resp2)
+    if choice(i)==sideid(i)
+    resp2(i)=1;
+    else
+    resp2(i)=0;
+    end
+end
+RT=cell2mat(RTs)';
+
+csvframe=horzcat(tempsubid,sideid,scid,choice,RT,resp2);
+
+
+headers{1}='subj_idx';
+headers{2}='side';
+headers{3}='sc';
+headers{4}='choice';
+headers{5}='rt';
+headers{6}='response';
+
+
+
+
+csvwrite_with_headers(strcat(folder,'/',trialinfo.config.const.sbj.subname{1},'_ddm.csv'),csvframe,headers)
+
+
+
+
